@@ -17,7 +17,7 @@ int main(void)
 
 	while (1)
 	{
-		printf("$:");
+		printf("$: ");
 		fflush(stdout); /*Flush the output buffer to ensure prompt is displayed*/
 		if (fgets(command, MAX_COMMAND_LENGTH, stdin) == NULL)
 		{

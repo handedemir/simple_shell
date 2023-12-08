@@ -1,0 +1,20 @@
+#include <unistd.h>
+#include <stdarg.h>
+#include <stdio.h> // For va_list, va_start, va_end
+
+void custom_printf(const char *format, ...) {
+    va_list args;
+    va_start(args, format);
+
+    char buffer[1024]; // Adjust the size as needed
+    int len = vsprintf(buffer, format, args);
+
+    va_end(args);
+
+    write(STDOUT_FILENO, buffer, len);
+}
+
+int main() {
+    custom_printf("Hello, %s! The number is: %d\n", "User", 42);
+    return 0;
+}
