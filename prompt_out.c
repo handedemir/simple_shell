@@ -28,7 +28,7 @@ int main(void)
 
 	while (1)
 	{
-		custom_print(STDOUT_FILENO, "$:  ");
+		custom_print(STDOUT_FILENO, "$: ");
 		fflush(stdout);
 
 		ssize_t read = getline(&command, &command_len, stdin);
@@ -50,8 +50,8 @@ int main(void)
 			char *args[] = { command, NULL };
 
 			execve(command, args, NULL);
-			write(STDERR_FILENO, "Error: Command not found\n",
-					strlen("Error: Command not found\n"));
+			write(STDERR_FILENO, "Error: No such file or directory\n",
+					strlen("Error: No such file or directory\n"));
 			exit(EXIT_FAILURE);
 		} else
 		{
