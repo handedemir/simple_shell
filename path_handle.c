@@ -3,55 +3,78 @@
 #include <string.h>
 #include <unistd.h>
 
-#define MAX_PATH_LENGTH 1024
-#define MAX_COMMAND_LENGTH 128
+#define MAX_INPUT_SIZE 1024
 
-int main() 
+void display_prompt(void)
 {
-	char command[MAX_COMMAND_LENGTH];
-	printf("Enter the command: ");
-	fgets(command, MAX_COMMAND_LENGTH, stdin);
+	write(STDOUT_FILENO, "$ ", 2);
+}
 
-    /*Remove newline character if present*/
-	size_t len = strlen(command);
-	if (command[len - 1] == '\n')
-	{
-		command[len - 1] = '\0';
-	}
-	char* path = getenv("PATH");
-	if (path == NULL)
-	{
-		printf("PATH environment variable not found\n");
-		return 1;
-	}
-	
-	char* token;
-	char pathCopy[MAX_PATH_LENGTH];
-	strcpy(pathCopy, path);
+char *read_input()
+{
+	char *input = NULL;
+	size_t len = 0;
+	ssize_t read;
 
-    /* Tokenize PATH variable*/
-    token = strtok(pathCopy, ":");
-    
-    int commandFound = 0;
-    while (token != NULL)
-    {
-	    char commandPath[MAX_PATH_LENGTH];
-	    snprintf(commandPath, sizeof(commandPath), "%s/%s", token, command);
-	    
-	    /*Check if the command exists*/
-	    if (access(commandPath, X_OK) != -1)
-	    {
-		    commandFound = 1;
-            /*Execute the command*/
-		    system(commandPath);
-		    break;
-	    }
-	    
-	    token = strtok(NULL, ":");
-    }
-    if (!commandFound)
-    {
-	    printf("Command '%s' not found in PATH\n", command);
-    }
-    return 0;
+	display_prompt();
+	read = getline(&input, &len, stdin);
+
+	if (read == -1)
+	{
+		perror("getline");
+		exit(EXIT_FAILURE);
+	}
+
+	input[strcspn(input, "\n")] = '\0';/*Remove newline character*/
+	return (input);
+}
+void execute_command(char *input)
+{
+	char *token;
+	char *path = getenv("PATH");
+	char *path_copy = strdup(path);
+
+	token = strtok(path_copy, ":");
+
+	int command_found = 0;
+
+	while (token != NULL)
+	{
+		size_t command_path_len = strlen(token) + strlen(input) + 2;
+		char command_path[command_path_len];
+
+		strcpy(command_path, token);
+		strcat(command_path, "/");
+		strcat(command_path, input);
+
+		if (access(command_path, X_OK) == 0)
+		{
+			command_found = 1;
+			execve(command_path, (char *[]){input, NULL}, NULL);
+			perror("execve");
+			break;
+		}
+
+		token = strtok(NULL, ":");
+	}
+
+	free(path_copy);
+
+	if (!command_found)
+	{
+		write(STDOUT_FILENO, "Command not found\n", 18);
+	}
+}
+
+int main(void)
+{
+	char *input;
+
+	while (1)
+	{
+		input = read_input();
+		execute_command(input);
+		free(input);
+	}
+	return (0);
 }
