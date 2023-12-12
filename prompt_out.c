@@ -7,14 +7,14 @@
 #define MAX_COMMAND_LENGTH 100
 
 /**
- * custom_print - here we are passing our prompt
- * @fd: parameter 1
+ * print_prompt - here we are passing our prompt
+ * @dg: parameter 1
  * @str: parameter 2
  * Return: 0
  */
-void custom_print(int fd, const char *str)
+void print_prompt(int dg, const char *str)
 {
-	write(fd, str, strlen(str));
+	write(dg, str, strlen(str));
 }
 /**
  * main - entry point of main program
@@ -22,23 +22,23 @@ void custom_print(int fd, const char *str)
  */
 int main(void)
 {
-	char *command = NULL;
-	size_t command_len = 0;
+	char *comm = NULL;
+	size_t comm_len = 0;
 	int status;
 
 	while (1)
 	{
-		custom_print(STDOUT_FILENO, "$: ");
+		print_prompt(STDOUT_FILENO, "$: ");
 		fflush(stdout);
 
-		ssize_t read = getline(&command, &command_len, stdin);
+		ssize_t read = getline(&comm, &comm_len, stdin);
 
 		if (read == -1)
 		{
 			perror("Error reading command");
 			continue;
 		}
-		command[strcspn(command, "\n")] = '\0';
+		comm[strcspn(comm, "\n")] = '\0';
 		pid_t pid = fork();
 
 		if (pid < 0)
@@ -47,9 +47,9 @@ int main(void)
 			exit(EXIT_FAILURE);
 		} else if (pid == 0)
 		{
-			char *args[] = { command, NULL };
+			char *args[] = { comm, NULL };
 
-			execve(command, args, NULL);
+			execve(comm, args, NULL);
 			write(STDERR_FILENO, "Error: No such file or directory\n",
 					strlen("Error: No such file or directory\n"));
 			exit(EXIT_FAILURE);
@@ -58,6 +58,6 @@ int main(void)
 			waitpid(pid, &status, 0);
 		}
 	}
-	free(command);
+	free(comm);
 	return (0);
 }
