@@ -30,19 +30,18 @@ char *read_input()
 }
 void execute_command(char *input)
 {
-	char *token;
 	char *path = getenv("PATH");
 	char *path_copy = strdup(path);
 
 	int command_found = 0;
-	size_t input_len = strlen(input);
-
-	token = strtok(path_copy, ":");
-
+	char *command_path = NULL;
+	char *token = strtok(path_copy, ":");
+	
 	while (token != NULL)
 	{
+		size_t input_len = strlen(input);
 		size_t command_path_len = strlen(token) + input_len + 2;
-		char *command_path = (char *)malloc(command_path_len);
+		command_path = malloc(command_path_len);
 
 		if (command_path == NULL)
 		{
@@ -56,9 +55,8 @@ void execute_command(char *input)
 
 		if (access(command_path, X_OK) == 0)
 		{
-			char **args = (char **)malloc(sizeof(char *) * 2);
+			char **args = malloc(sizeof(char *) * 2);
 
-			command_found = 1;
 
 			if (args == NULL)
 			{
@@ -74,11 +72,8 @@ void execute_command(char *input)
 			free(command_path);
 			break;
 	}
-		free(command_path);
-		token = strtok(NULL, ":");
-	}
-
-	free(path_copy);
+		free(path_copy);
+		
 
 	if (!command_found)
 	{
