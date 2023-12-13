@@ -20,38 +20,47 @@ void print_prompt(int dg, const char *str)
  * main - entry point of main program
  * Return: 0
  */
+
 int main(void)
 {
 	char *comm = NULL;
 	size_t comm_len = 0;
+	ssize_t read_chars;
 	int status;
+	pid_t pid;
+
 
 	while (1)
 	{
-		print_prompt(STDOUT_FILENO, "$: ");
-		fflush(stdout);
-
-		ssize_t read = getline(&comm, &comm_len, stdin);
-
-		if (read == -1)
-		{
-			perror("Error reading command");
-			continue;
-		}
-		comm[strcspn(comm, "\n")] = '\0';
-		pid_t pid = fork();
+		pid = fork();
 
 		if (pid < 0)
 		{
 			perror("Fork failed");
 			exit(EXIT_FAILURE);
-		} else if (pid == 0)
+		}else if(pid == 0)
 		{
-			char *args[] = { comm, NULL };
+			
+		print_prompt(STDOUT_FILENO, "$: ");
+		fflush(stdout);
+
+		read_chars = getline(&comm, &comm_len, stdin);
+
+		if (read_chars == -1)
+		{
+			perror("Error reading command");
+			continue;
+		}
+		comm[strcspn(comm, "\n")] = '\0';
+
+			char *args[2];
+
+			args[0] = comm;
+			args[1] = NULL;
 
 			execve(comm, args, NULL);
-			write(STDERR_FILENO, "Error: No such file or directory\n",
-					strlen("Error: No such file or directory\n"));
+
+			perror("Error executing command");
 			exit(EXIT_FAILURE);
 		} else
 		{
