@@ -8,9 +8,13 @@
 
 /**
  * main - Entry point
+ * @argc: element 1
+ * @argv: element 2
+ * @env_lp: element 3
  * Return: 0
  */
-int main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)), char *env_lp[])
+int main(int argc __attribute__((unused)),
+		char *argv[] __attribute__((unused)), char *env_lp[])
 {
 	int dw;
 	char **envv = env_lp;
@@ -44,7 +48,7 @@ S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	/* Execute the cat command to display the contents of output.txt*/
 	{
 		perror("execve failed");
-		return EXIT_FAILURE;
+		return (EXIT_FAILURE);
 	}
-	return EXIT_SUCCESS;
+	return (EXIT_SUCCESS);
 }

@@ -56,7 +56,7 @@ void execute_command(char *input)
 
 		if (access(command_path, X_OK) == 0)
 		{
-			char **args = (char **)malloc(sizeof(char *) *2);
+			char **args = (char **)malloc(sizeof(char *) * 2);
 
 			command_found = 1;
 
