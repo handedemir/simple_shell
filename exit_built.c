@@ -23,14 +23,15 @@ int main(void)
 		if (read == -1)
 		{
 			perror("getline");
+			free(input_in);
 			exit(EXIT_FAILURE);
 		}
-		input[strcspn(input, "\n")] = '\0'; /*Remove newline character*/
+		input_in[strcspn(input_in, "\n")] = '\0'; /*Remove newline character*/
 
-		if (strcmp(input, "exit") == 0)
+		if (strcmp(input_in, "exit") == 0)
 		{
 			write(STDOUT_FILENO, "Exiting shell...\n", 17);
-			free(input);
+			free(input_in);
 			exit(EXIT_SUCCESS);
 		}
 		/*If the command is not exit, you can add other commands here*/

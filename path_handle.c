@@ -34,14 +34,21 @@ void execute_command(char *input)
 	char *path = getenv("PATH");
 	char *path_copy = strdup(path);
 
-	token = strtok(path_copy, ":");
-
 	int command_found = 0;
+	size_t input_len = strlen(input);
+
+	token = strtok(path_copy, ":");
 
 	while (token != NULL)
 	{
-		size_t command_path_len = strlen(token) + strlen(input) + 2;
-		char command_path[command_path_len];
+		size_t command_path_len = strlen(token) + input_len + 2;
+		char *command_path = (char *)malloc(command_path_len);
+
+		if (command_path == NULL)
+		{
+			perror("malloc");
+			exit(EXIT_FAILURE);
+		}
 
 		strcpy(command_path, token);
 		strcat(command_path, "/");
@@ -49,12 +56,25 @@ void execute_command(char *input)
 
 		if (access(command_path, X_OK) == 0)
 		{
-			command_found = 1;
-			execve(command_path, (char *[]){input, NULL}, NULL);
-			perror("execve");
-			break;
-		}
+			char **args = (char **)malloc(sizeof(char *) *2);
 
+			command_found = 1;
+
+			if (args == NULL)
+			{
+			perror("malloc");
+			exit(EXIT_FAILURE);
+		}
+			args[0] = input;
+			args[1] = NULL;
+
+			execve(command_path, args, NULL);
+			perror("execve");
+			free(args);
+			free(command_path);
+			break;
+	}
+		free(command_path);
 		token = strtok(NULL, ":");
 	}
 

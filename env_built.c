@@ -10,11 +10,14 @@
  * main - Entry point
  * Return: 0
  */
-
-int main(int argc, char *argv[], char *env_lp[])
+int main(int argc __attribute__((unused)), char *argv[] __attribute__((unused)), char *env_lp[])
 {
+	int dw;
+	char **envv = env_lp;
+	char *args[] = {"cat", "output.txt", NULL};
+
 	/*Create a file descriptor to write to output.txt*/
-	int dw = open("output.txt", O_WRONLY | O_CREAT | O_TRUNC,
+	dw = open("output.txt", O_WRONLY | O_CREAT | O_TRUNC,
 S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 
 	if (dw == -1)
@@ -22,8 +25,6 @@ S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 		perror("Error opening file");
 		exit(EXIT_FAILURE);
 	}
-	/*Retrieve environment variables*/
-	char **envv = env_lp;
 	/*Write environment variables to output.txt*/
 	while (*envv != NULL)
 	{
@@ -38,10 +39,12 @@ S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
     /*Close the file descriptor*/
 	close(dw);
 
-    /* Create arguments for the execve function*/
-	char *args[] = {"cat", "output.txt", NULL};
+	if (execve("/bin/cat", args, env_lp) == -1)
 
 	/* Execute the cat command to display the contents of output.txt*/
-	execve("/bin/cat", args, env_lp);
-	return (0);
+	{
+		perror("execve failed");
+		return EXIT_FAILURE;
+	}
+	return EXIT_SUCCESS;
 }

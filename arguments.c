@@ -11,9 +11,11 @@
  */
 int main(void)
 {
+	ssize_t byte_toread;
 	char input_el[MAX_INPUT];
-	size_t leng = MAX_INPUT;
-	ssize_t byte_toread; /*Renamed 'read' to 'bytes_read'*/
+	char *args[MAX_ARGS + 1];
+	int argc = 0;
+	char *token = strtok(input_el, " ");
 
     /*Read the command line input*/
 	write(STDOUT_FILENO, "Please Enter command: ", 22);
@@ -26,9 +28,6 @@ int main(void)
 	input_el[byte_toread - 1] = '\0'; /*Removing newline character*/
 
     /*Tokenize the input into arguments*/
-	int argc = 0;
-	char *args[MAX_ARGS + 1]; /*Additional space for the NULL terminator*/
-	char *token = strtok(input_el, " ");
 
 	while (token != NULL && argc < MAX_ARGS)
 	{
