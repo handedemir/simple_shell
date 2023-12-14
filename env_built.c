@@ -5,7 +5,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <string.h>
-
+#include "shell.h"
 /**
  * main - Entry point
  * @argc: element 1
