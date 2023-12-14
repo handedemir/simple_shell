@@ -12,7 +12,11 @@
 int main(void);
 int main(int argc __attribute__((unused)),
                 char *argv[] __attribute__((unused)), char *env_lp[]);
-
+void print_prompt(int dg, const char *str);
+int main(void);
+void execute_command(char *input);
+char *read_input();
+void display_prompt(void);
 
 
 #endif
