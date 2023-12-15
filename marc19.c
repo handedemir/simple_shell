@@ -3,11 +3,11 @@
 /**
  * hsh - main shell loop
  * @info: the parameter & return info struct
- * @av: the argument vector from main()
+ * @agv: the argument vector from main()
  *
  * Return: 0 on success, 1 on error, or error code
  */
-int hsh(info_t *info, char **av)
+int hsh(info_t *info, char **agv)
 {
 	ssize_t r = 0;
 	int builtin_ret = 0;
@@ -21,7 +21,7 @@ int hsh(info_t *info, char **av)
 		r = get_input(info);
 		if (r != -1)
 		{
-			set_info(info, av);
+			set_info(info, agv);
 			builtin_ret = find_builtin(info);
 			if (builtin_ret == -1)
 				find_cmd(info);
@@ -30,7 +30,7 @@ int hsh(info_t *info, char **av)
 			_putchar('\n');
 		free_info(info, 0);
 	}
-	write_history(info);
+	write_histry(info);
 	free_info(info, 1);
 	if (!interactive(info) && info->status)
 		exit(info->status);
@@ -45,14 +45,14 @@ int hsh(info_t *info, char **av)
 
 /**
  * find_builtin - finds a builtin command
- * @info: the parameter & return info struct
+ * @infor: the parameter & return info struct
  *
  * Return: -1 if builtin not found,
  *			0 if builtin executed successfully,
  *			1 if builtin found but not successful,
  *			-2 if builtin signals exit()
  */
-int find_builtin(info_t *info)
+int find_builtin(info_t *infor)
 {
 	int i, built_in_ret = -1;
 	builtin_table builtintbl[] = {
@@ -71,19 +71,19 @@ int find_builtin(info_t *info)
 		if (_strcmp(info->argv[0], builtintbl[i].type) == 0)
 		{
 			info->line_count++;
-			built_in_ret = builtintbl[i].func(info);
+			built_in_ret = builtintbl[i].func(infor);
 			break;
 		}
 	return (built_in_ret);
 }
 
 /**
- * find_cmd - finds a command in PATH
- * @info: the parameter & return info struct
+ * find_cmad - finds a command in PATH
+ * @infor: the parameter & return info struct
  *
  * Return: void
  */
-void find_cmd(info_t *info)
+void find_cmad(info_t *infor)
 {
 	char *path = NULL;
 	int i, k;
@@ -100,21 +100,21 @@ void find_cmd(info_t *info)
 	if (!k)
 		return;
 
-	path = find_path(info, _getenv(info, "PATH="), info->argv[0]);
+	path = find_path(infor, _getenv(infor, "PATH="), infor->argv[0]);
 	if (path)
 	{
 		info->path = path;
-		fork_cmd(info);
+		fork_cmad(infor);
 	}
 	else
 	{
-		if ((interactive(info) || _getenv(info, "PATH=")
-			|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
-			fork_cmd(info);
+		if ((interactive(infor) || _getenv(infor, "PATH=")
+			|| info->argv[0][0] == '/') && is_cmad(infor, info->argv[0]))
+			fork_cmad(info);
 		else if (*(info->arg) != '\n')
 		{
 			info->status = 127;
-			print_error(info, "not found\n");
+			print_error(infor, "not found\n");
 		}
 	}
 }
