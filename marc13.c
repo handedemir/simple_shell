@@ -21,7 +21,7 @@ void set_info(info_t *infor, char **av)
 {
 	int i = 0;
 
-	infor->fname = av[0];
+	infor->fnam = av[0];
 	if (infor->arg)
 	{
 		infor->argv = strtow(infor->arg, " \t");
@@ -56,17 +56,17 @@ void free_info(info_t *infor, int all)
 	infor->path = NULL;
 	if (all)
 	{
-		if (!infor->cmd_buf)
+		if (!infor->cmad_buffr)
 			free(infor->arg);
-		if (infor->env)
-			free_list(&(infor->env));
-		if (infor->history)
-			free_list(&(infor->history));
-		if (infor->alias)
-			free_list(&(infor->alias));
-		ffree(infor->environ);
-			infor->environ = NULL;
-		bfree((void **)infor->cmd_buf);
+		if (infor->envi)
+			free_list(&(infor->envi));
+		if (infor->histry)
+			free_list(&(infor->histry));
+		if (infor->alis)
+			free_list(&(infor->alis));
+		ffree(infor->envrn);
+			infor->envrn = NULL;
+		bfree((void **)infor->cmad_buffr);
 		if (infor->readfd > 2)
 			close(infor->readfd);
 		_putchar(BUF_FLUSH);

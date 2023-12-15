@@ -2,85 +2,85 @@
 
 /**
  * _myenv - prints the current env to the output
- * @info: Structure containing potential arguments
+ * @dat: Structure containing potential arguments
  * Return: Always 0 is used
  */
-int _myenv(info_t *info)
+int _myenv(info_t *dat)
 {
-	print_list_str(info->env);
+	print_list_str(dat->envi);
 	return (0);
 }
 
 /**
  * _getenv - gets the value of an environ variable to use
- * @info: Structure containing potential arguments to use
- * @name: env var name
+ * @dat: Structure containing potential arguments to use
+ * @nam: envi var nam
  * Return: the value at the output
  */
-char *_getenv(info_t *info, const char *name)
+char *_getenv(info_t *dat, const char *nam)
 {
-	list_t *node = info->env;
+	list_t *inter = dat->envi;
 	char *p;
 
-	while (node)
+	while (inter)
 	{
-		p = starts_with(node->str, name);
+		p = starts_with(inter->str, nam);
 		if (p && *p)
 			return (p);
-		node = node->next;
+		inter = inter->next;
 	}
 	return (NULL);
 }
 
 /**
  * _mysetenv - Initialize a new environment variable to use
- * @info: Structure containing potential arguments to use
+ * @dat: Structure containing potential arguments to use
  *  Return: Always 0 is used
  */
-int _mysetenv(info_t *info)
+int _mysetenv(info_t *dat)
 {
-	if (info->argc != 3)
+	if (dat->argc != 3)
 	{
 		_eputs("Incorrect number of arguements\n");
 		return (1);
 	}
-	if (_setenv(info, info->argv[1], info->argv[2]))
+	if (_setenv(dat, dat->argv[1], dat->argv[2]))
 		return (0);
 	return (1);
 }
 
 /**
  * _myunsetenv - Remove an environment variable to use
- * @info: Structure containing potential arguments.
+ * @dat: Structure containing potential arguments.
  *  Return: Always 0 is used
  */
-int _myunsetenv(info_t *info)
+int _myunsetenv(info_t *dat)
 {
 	int v;
 
-	if (info->argc == 1)
+	if (dat->argc == 1)
 	{
 		_eputs("Too few arguements.\n");
 		return (1);
 	}
-	for (v = 1; v <= info->argc; v++)
-		_unsetenv(info, info->argv[v]);
+	for (v = 1; v <= dat->argc; v++)
+		_unsetenv(dat, dat->argv[v]);
 
 	return (0);
 }
 
 /**
  * populate_env_list - populates env linked list to the public
- * @info: Structure containing potential arguments to use to the output
+ * @dat: Structure containing potential arguments to use to the output
  * Return: Always 0 is used
  */
-int populate_env_list(info_t *info)
+int populate_env_list(info_t *dat)
 {
-	list_t *node = NULL;
+	list_t *inter = NULL;
 	size_t v;
 
 	for (v = 0; environ[v]; v++)
-		add_node_end(&node, environ[v], 0);
-	info->env = node;
+		add_node_end(&inter, environ[v], 0);
+	dat->environ = inter;
 	return (0);
 }
