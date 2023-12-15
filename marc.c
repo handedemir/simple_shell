@@ -1,26 +1,26 @@
-#include "shell.h"
+#include "marc8.h"
 
 /**
  * interactive - returns true if shell is interactive mode
- * @info: struct address
+ * @dat: struct address
  *
  * Return: 1 if interactive mode, 0 otherwise
  */
-int interactive(info_t *info)
+int interactive(info_t *dat)
 {
-	return (isatty(STDIN_FILENO) && info->readfd <= 2);
+	return (isatty(STDIN_FILENO) && dat->readfd <= 2);
 }
 
 /**
  * is_delim - checks if character is a delimeter
  * @c: the char to check
- * @delim: the delimeter string
+ * @delmiter: the delimeter string
  * Return: 1 if true, 0 if false
  */
-int is_delim(char c, char *delim)
+int is_delim(char c, char *delmiter)
 {
-	while (*delim)
-		if (*delim++ == c)
+	while (*delmiter)
+		if (*delmiter++ == c)
 			return (1);
 	return (0);
 }

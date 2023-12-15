@@ -1,8 +1,8 @@
-#include "shell.h"
+#include "marc8.h"
 
 /**
  * list_len - determines length of linked list
- * @h: pointer to first node
+ * @h: pointer to first inter
  *
  * Return: size of list
  */
@@ -20,13 +20,13 @@ size_t list_len(const list_t *h)
 
 /**
  * list_to_strings - returns an array of strings of the list->str
- * @head: pointer to first node
+ * @head: pointer to first inter
  *
  * Return: array of strings
  */
 char **list_to_strings(list_t *head)
 {
-	list_t *node = head;
+	list_t *inter = head;
 	size_t i = list_len(head), j;
 	char **strs;
 	char *str;
@@ -36,9 +36,9 @@ char **list_to_strings(list_t *head)
 	strs = malloc(sizeof(char *) * (i + 1));
 	if (!strs)
 		return (NULL);
-	for (i = 0; node; node = node->next, i++)
+	for (i = 0; inter; inter = inter->next, i++)
 	{
-		str = malloc(_strlen(node->str) + 1);
+		str = malloc(_strlen(inter->str) + 1);
 		if (!str)
 		{
 			for (j = 0; j < i; j++)
@@ -47,7 +47,7 @@ char **list_to_strings(list_t *head)
 			return (NULL);
 		}
 
-		str = _strcpy(str, node->str);
+		str = _strcpy(str, inter->str);
 		strs[i] = str;
 	}
 	strs[i] = NULL;
@@ -57,7 +57,7 @@ char **list_to_strings(list_t *head)
 
 /**
  * print_list - prints all elements of a list_t linked list
- * @h: pointer to first node
+ * @h: pointer to first inter
  *
  * Return: size of list
  */
@@ -79,41 +79,41 @@ size_t print_list(const list_t *h)
 }
 
 /**
- * node_starts_with - returns node whose string starts with prefix
- * @node: pointer to list head
- * @prefix: string to match
- * @c: the next character after prefix to match
+ * node_starts_with - returns inter whose string starts with pr
+ * @inter: pointer to list head
+ * @pr: string to match
+ * @c: the next character after pr to match
  *
- * Return: match node or null
+ * Return: match inter or null
  */
-list_t *node_starts_with(list_t *node, char *prefix, char c)
+list_t *node_starts_with(list_t *inter, char *pr, char c)
 {
 	char *p = NULL;
 
-	while (node)
+	while (inter)
 	{
-		p = starts_with(node->str, prefix);
+		p = starts_with(inter->str, pr);
 		if (p && ((c == -1) || (*p == c)))
-			return (node);
-		node = node->next;
+			return (inter);
+		inter = inter->next;
 	}
 	return (NULL);
 }
 
 /**
- * get_node_index - gets the index of a node
+ * get_node_indx - gets the index of a inter
  * @head: pointer to list head
- * @node: pointer to the node
+ * @inter: pointer to the inter
  *
- * Return: index of node or -1
+ * Return: index of inter or -1
  */
-ssize_t get_node_index(list_t *head, list_t *node)
+ssize_t get_node_indx(list_t *head, list_t *inter)
 {
 	size_t i = 0;
 
 	while (head)
 	{
-		if (head == node)
+		if (head == inter)
 			return (i);
 		head = head->next;
 		i++;

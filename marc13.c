@@ -1,15 +1,15 @@
-#include "shell.h"
+#include "marc8.h"
 
 /**
  * clear_info - initializes info_t struct
- * @info: struct address
+ * @infor: struct address
  */
-void clear_info(info_t *info)
+void clear_info(info_t *infor)
 {
-	info->arg = NULL;
-	info->argv = NULL;
-	info->path = NULL;
-	info->argc = 0;
+	infor->arg = NULL;
+	infor->argv = NULL;
+	infor->path = NULL;
+	infor->argc = 0;
 }
 
 /**
@@ -17,58 +17,58 @@ void clear_info(info_t *info)
  * @info: struct address
  * @av: argument vector
  */
-void set_info(info_t *info, char **av)
+void set_info(info_t *infor, char **av)
 {
 	int i = 0;
 
-	info->fname = av[0];
-	if (info->arg)
+	infor->fname = av[0];
+	if (infor->arg)
 	{
-		info->argv = strtow(info->arg, " \t");
-		if (!info->argv)
+		infor->argv = strtow(infor->arg, " \t");
+		if (!infor->argv)
 		{
 
-			info->argv = malloc(sizeof(char *) * 2);
-			if (info->argv)
+			infor->argv = malloc(sizeof(char *) * 2);
+			if (infor->argv)
 			{
-				info->argv[0] = _strdup(info->arg);
-				info->argv[1] = NULL;
+				infor->argv[0] = _strdup(infor->arg);
+				infor->argv[1] = NULL;
 			}
 		}
-		for (i = 0; info->argv && info->argv[i]; i++)
+		for (i = 0; infor->argv && infor->argv[i]; i++)
 			;
-		info->argc = i;
+		infor->argc = i;
 
-		replace_alias(info);
-		replace_vars(info);
+		replace_alias(infor);
+		replace_vars(infor);
 	}
 }
 
 /**
  * free_info - frees info_t struct fields
- * @info: struct address
+ * @infor: struct address
  * @all: true if freeing all fields
  */
-void free_info(info_t *info, int all)
+void free_info(info_t *infor, int all)
 {
-	ffree(info->argv);
-	info->argv = NULL;
-	info->path = NULL;
+	ffree(infor->argv);
+	infor->argv = NULL;
+	infor->path = NULL;
 	if (all)
 	{
-		if (!info->cmd_buf)
-			free(info->arg);
-		if (info->env)
-			free_list(&(info->env));
-		if (info->history)
-			free_list(&(info->history));
-		if (info->alias)
-			free_list(&(info->alias));
-		ffree(info->environ);
-			info->environ = NULL;
-		bfree((void **)info->cmd_buf);
-		if (info->readfd > 2)
-			close(info->readfd);
+		if (!infor->cmd_buf)
+			free(infor->arg);
+		if (infor->env)
+			free_list(&(infor->env));
+		if (infor->history)
+			free_list(&(infor->history));
+		if (infor->alias)
+			free_list(&(infor->alias));
+		ffree(infor->environ);
+			infor->environ = NULL;
+		bfree((void **)infor->cmd_buf);
+		if (infor->readfd > 2)
+			close(infor->readfd);
 		_putchar(BUF_FLUSH);
 	}
 }

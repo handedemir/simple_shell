@@ -1,19 +1,19 @@
-#include "shell.h"
+#include "marc8.h"
 
 /**
  * _strlen - returns the length of a string
- * @s: the string whose length to check
+ * @mar: the string whose length to check
  *
  * Return: integer length of string
  */
-int _strlen(char *s)
+int _strlen(char *mar)
 {
 	int i = 0;
 
-	if (!s)
+	if (!mar)
 		return (0);
 
-	while (*s++)
+	while (*mar++)
 		i++;
 	return (i);
 }
@@ -41,35 +41,35 @@ int _strcmp(char *s1, char *s2)
 }
 
 /**
- * starts_with - checks if needle starts with haystack
- * @haystack: string to search
+ * starts_with - checks if needle starts with haystck
+ * @haystck: string to search
  * @needle: the substring to find
  *
- * Return: address of next char of haystack or NULL
+ * Return: address of next char of haystck or NULL
  */
-char *starts_with(const char *haystack, const char *needle)
+char *starts_with(const char *haystck, const char *needle)
 {
 	while (*needle)
-		if (*needle++ != *haystack++)
+		if (*needle++ != *haystck++)
 			return (NULL);
-	return ((char *)haystack);
+	return ((char *)haystck);
 }
 
 /**
  * _strcat - concatenates two strings
- * @dest: the destination buffer
+ * @des: the destination buffer
  * @src: the source buffer
  *
  * Return: pointer to destination buffer
  */
-char *_strcat(char *dest, char *src)
+char *_strcat(char *des, char *src)
 {
-	char *ret = dest;
+	char *ret = des;
 
-	while (*dest)
-		dest++;
+	while (*des)
+		des++;
 	while (*src)
-		*dest++ = *src++;
-	*dest = *src;
+		*des++ = *src++;
+	*des = *src;
 	return (ret);
 }

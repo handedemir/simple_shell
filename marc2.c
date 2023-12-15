@@ -1,20 +1,20 @@
-#include "shell.h"
+#include "marc8.h"
 
 /**
  *_eputs - prints an input string
- * @str: the string to be printed
+ * @strx: the string to be printed
  *
  * Return: Nothing
  */
-void _eputs(char *str)
+void _eputs(char *strx)
 {
 	int i = 0;
 
-	if (!str)
+	if (!strx)
 		return;
-	while (str[i] != '\0')
+	while (strx[i] != '\0')
 	{
-		_eputchar(str[i]);
+		_eputchar(strx[i]);
 		i++;
 	}
 }
@@ -66,20 +66,20 @@ int _putfd(char c, int fd)
 
 /**
  *_putsfd - prints an input string
- * @str: the string to be printed
+ * @strx: the string to be printed
  * @fd: the filedescriptor to write to
  *
  * Return: the number of chars put
  */
-int _putsfd(char *str, int fd)
+int _putsfd(char *strx, int fd)
 {
 	int i = 0;
 
-	if (!str)
+	if (!strx)
 		return (0);
-	while (*str)
+	while (*strx)
 	{
-		i += _putfd(*str++, fd);
+		i += _putfd(*strx++, fd);
 	}
 	return (i);
 }

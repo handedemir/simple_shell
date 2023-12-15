@@ -1,5 +1,5 @@
-#ifndef _SHELL_H_
-#define _SHELL_H_
+#ifndef _MARC8_H_
+#define _MARC8_H_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -57,20 +57,20 @@ typedef struct liststr
  *@argv: an array of strings generated from arg
  *@path: a string path for the current command
  *@argc: the argument count
- *@line_count: the error count
- *@err_num: the error code for exit()s
- *@linecount_flag: if on count this line of input
- *@fname: the program filename
- *@env: linked list local copy of environ
- *@environ: custom modified copy of environ from LL env
- *@history: the history node
- *@alias: the alias node
- *@env_changed: on if environ was changed
+ *@line_cnt: the error count
+ *@err_numb: the error code for exit()s
+ *@linecnt_flag: if on count this line of input
+ *@fnam: the program filename
+ *@envi: linked list local copy of environ
+ *@envrn: custom modified copy of environ from LL env
+ *@histry: the history node
+ *@alis: the alias node
+ *@env_changd: on if environ was changed
  *@status: the return status of the last exec'd command
- *@cmd_buf: address of pointer to cmd_buf, on if chaining
- *@cmd_buf_type: CMD_type ||, &&, ;
+ *@cmad_buffr: address of pointer to cmd_buf, on if chaining
+ *@cmad_buffr_typ: CMD_type ||, &&, ;
  *@readfd: the fd from which to read line input
- *@histcount: the history line number count
+ *@histcnt: the history line number count
  */
 typedef struct passinfo
 {
@@ -78,21 +78,21 @@ typedef struct passinfo
 	char **argv;
 	char *path;
 	int argc;
-	unsigned int line_count;
-	int err_num;
-	int linecount_flag;
-	char *fname;
-	list_t *env;
-	list_t *history;
-	list_t *alias;
-	char **environ;
-	int env_changed;
+	unsigned int line_cnt;
+	int err_numb;
+	int linecnt_flag;
+	char *fnam;
+	list_t *envi;
+	list_t *histry;
+	list_t *alis;
+	char **envrn;
+	int env_changd;
 	int status;
 
-	char **cmd_buf; /* pointer to cmd ; chain buffer, for memory mangement */
-	int cmd_buf_type; /* CMD_type ||, &&, ; */
+	char **cmad_buffr; /* pointer to cmd ; chain buffer, for memory mangement */
+	int cmad_buffr_typ; /* CMD_type ||, &&, ; */
 	int readfd;
-	int histcount;
+	int histcnt;
 } info_t;
 
 #define INFO_INIT \
@@ -101,12 +101,12 @@ typedef struct passinfo
 
 /**
  *struct builtin - contains a builtin string and related function
- *@type: the builtin command flag
+ *@typ: the builtin command flag
  *@func: the function
  */
 typedef struct builtin
 {
-	char *type;
+	char *typ;
 	int (*func)(info_t *);
 } builtin_table;
 
@@ -118,7 +118,7 @@ void find_cmd(info_t *);
 void fork_cmd(info_t *);
 
 /* toem_parser.c */
-int is_cmd(info_t *, char *);
+int is_cmad(info_t *, char *);
 char *dup_chars(char *, int, int);
 char *find_path(info_t *, char *, char *);
 
@@ -153,7 +153,7 @@ char **strtow(char *, char *);
 char **strtow2(char *, char);
 
 /* toem_realloc.c */
-char *_memset(char *, char, unsigned int);
+char *_memoset(char *, char, unsigned int);
 void ffree(char **);
 void *_realloc(void *, unsigned int, unsigned int);
 

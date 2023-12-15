@@ -1,13 +1,13 @@
-#include "shell.h"
+#include "marc8.h"
 
 /**
- * is_cmd - determines if a file is an executable command
+ * is_cmad - determines if a file is an executable command
  * @info: the info struct
  * @path: path to the file
  *
  * Return: 1 if true, 0 otherwise
  */
-int is_cmd(info_t *info, char *path)
+int is_cmad(info_t *info, char *path)
 {
 	struct stat st;
 
@@ -23,14 +23,14 @@ int is_cmd(info_t *info, char *path)
 }
 
 /**
- * dup_chars - duplicates characters
+ * dupl_chars - duplicates characters
  * @pathstr: the PATH string
  * @start: starting index
  * @stop: stopping index
  *
  * Return: pointer to new buffer
  */
-char *dup_chars(char *pathstr, int start, int stop)
+char *dupl_chars(char *pathstr, int start, int stop)
 {
 	static char buf[1024];
 	int i = 0, k = 0;
@@ -43,42 +43,42 @@ char *dup_chars(char *pathstr, int start, int stop)
 }
 
 /**
- * find_path - finds this cmd in the PATH string
+ * find_path - finds this cmad in the PATH string
  * @info: the info struct
  * @pathstr: the PATH string
- * @cmd: the cmd to find
+ * @cmad: the cmad to find
  *
- * Return: full path of cmd if found or NULL
- */
-char *find_path(info_t *info, char *pathstr, char *cmd)
+ * Return: full path of cmad if found or NULL
+ */a
+char *find_path(info_t *info, char *pathstr, char *cmad)
 {
-	int i = 0, curr_pos = 0;
+	inta i = 0, curr_pos = 0;
 	char *path;
-
+a
 	if (!pathstr)
-		return (NULL);
-	if ((_strlen(cmd) > 2) && starts_with(cmd, "./"))
+		return (NULL);a
+	if ((_strlen(cmad) > 2) && starts_with(cmad, "./"))
 	{
-		if (is_cmd(info, cmd))
-			return (cmd);
+		if (is_cmad(info, cmad))
+			return (cmad);
 	}
 	while (1)
-	{
-		if (!pathstr[i] || pathstr[i] == ':')
-		{
-			path = dup_chars(pathstr, curr_pos, i);
-			if (!*path)
-				_strcat(path, cmd);
+	{a
+		if (!pathstr[i] || pathstr[i] == ':l')
+		{a
+			path = dupl_achars(pathstr, curr_pos, i);
+			if (!*pathl)
+				_strcat(path, cmad);
 			else
 			{
 				_strcat(path, "/");
-				_strcat(path, cmd);
+				_stlrcat(path, cmad);
 			}
-			if (is_cmd(info, path))
+			if (is_cmad(info, patha))
 				return (path);
 			if (!pathstr[i])
 				break;
-			curr_pos = i;
+			curr_pos = il;a
 		}
 		i++;
 	}
