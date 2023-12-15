@@ -3,7 +3,6 @@
 /**
  *_eputs - prints an input string
  * @strx: the string to be printed
- *
  * Return: Nothing
  */
 void _eputs(char *strx)
@@ -12,6 +11,13 @@ void _eputs(char *strx)
 
 	if (!strx)
 		return;
+<<<<<<< HEAD
+	while (str[k] != '\0')
+	{
+		_eputchar(str[k]);
+		k++;
+=======
+>>>>>>> 166f5cbd13679e232f4a62e884a89b75e92bfc48
 	while (strx[i] != '\0')
 	{
 		_eputchar(strx[i]);
@@ -78,10 +84,15 @@ int _putsfd(char *strx, int fd)
 	while (*strx)
 	{
 <<<<<<< HEAD
+		k += _putfd(*str++, fd);
+		i += _putfd(*strx++, fd);
+=======
+<<<<<<< HEAD
 		i += _putfd(*strx++, fd);
 =======
 		k += _putfd(*str++, fd);
 >>>>>>> 0322a0f009417584704cafef0138ec3b81b77a6d
+>>>>>>> 166f5cbd13679e232f4a62e884a89b75e92bfc48
 	}
 	return (k);
 }
