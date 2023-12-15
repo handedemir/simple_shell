@@ -7,14 +7,14 @@
  */
 int _myenv(info_t *dat)
 {
-	print_list_str(dat->env);
+	print_list_str(dat->envi);
 	return (0);
 }
 
 /**
  * _getenv - gets the value of an environ variable to use
  * @dat: Structure containing potential arguments to use
- * @nam: env var nam
+ * @nam: envi var nam
  * Return: the value at the output
  */
 char *_getenv(info_t *dat, const char *nam)
@@ -79,8 +79,8 @@ int populate_env_list(info_t *dat)
 	list_t *inter = NULL;
 	size_t v;
 
-	for (v = 0; envrn[v]; v++)
-		add_node_end(&inter, envrn[v], 0);
-	dat->envi = inter;
+	for (v = 0; environ[v]; v++)
+		add_node_end(&inter, environ[v], 0);
+	dat->environ = inter;
 	return (0);
 }

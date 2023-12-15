@@ -1,16 +1,10 @@
 #include "marc8.h"
 
 /**
-<<<<<<< HEAD
  *_eputs - prints an input string
  * @strx: the string to be printed
  *
  * Return: Nothing
-=======
- *_eputs - input strings will be printed
- * @str: the string to be printed
- * Return: Nothing to be returned
->>>>>>> 0322a0f009417584704cafef0138ec3b81b77a6d
  */
 void _eputs(char *strx)
 {
@@ -18,17 +12,10 @@ void _eputs(char *strx)
 
 	if (!strx)
 		return;
-<<<<<<< HEAD
 	while (strx[i] != '\0')
 	{
 		_eputchar(strx[i]);
 		i++;
-=======
-	while (str[k] != '\0')
-	{
-		_eputchar(str[k]);
-		k++;
->>>>>>> 0322a0f009417584704cafef0138ec3b81b77a6d
 	}
 }
 

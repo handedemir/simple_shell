@@ -1,16 +1,10 @@
 #include "marc8.h"
 
 /**
-<<<<<<< HEAD
  * interactive - returns true if shell is interactive mode
  * @dat: struct address
  *
  * Return: 1 if interactive mode, 0 otherwise
-=======
- * interactive - returns true if shell is correct
- * @info: this is the struct of the address
- * Return: 1
->>>>>>> 0322a0f009417584704cafef0138ec3b81b77a6d
  */
 int interactive(info_t *dat)
 {
@@ -18,17 +12,10 @@ int interactive(info_t *dat)
 }
 
 /**
-<<<<<<< HEAD
  * is_delim - checks if character is a delimeter
  * @c: the char to check
  * @delmiter: the delimeter string
  * Return: 1 if true, 0 if false
-=======
- * is_delim - delimiter is to be checked
- * @c: the parameter c
- * @delim: delimeter that we are going to use
- * Return: 1 for positive, or otherwise
->>>>>>> 0322a0f009417584704cafef0138ec3b81b77a6d
  */
 int is_delim(char c, char *delmiter)
 {

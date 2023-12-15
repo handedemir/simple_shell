@@ -1,15 +1,10 @@
 #include "marc8.h"
 
 /**
-<<<<<<< HEAD
  * _myhistory - displays the history list, one command by line, preceded
  *              with line numbers, starting at 0.
  * @dat: Structure containing potential arguments. Used to maintain
  *        constant function prototype.
-=======
- * _myhistory - displays the history list
- * @info: Structure containing potential arguments used
->>>>>>> 0322a0f009417584704cafef0138ec3b81b77a6d
  *  Return: Always 0
  */
 int _myhistory(info_t *dat)
@@ -19,25 +14,17 @@ int _myhistory(info_t *dat)
 }
 
 /**
-<<<<<<< HEAD
  * unset_alias - sets alias to string
  * @dat: parameter struct
  * @strx: the string alias
  *
  * Return: Always 0 on success, 1 on error
-=======
- * unset_alias - alias is set
- * @info: strcut is used as parameter
- * @str: alias is used as the string
- * Return: return 0 on success, 1 on error
->>>>>>> 0322a0f009417584704cafef0138ec3b81b77a6d
  */
 int unset_alias(info_t *dat, char *strx)
 {
 	char *d, c;
 	int ret;
 
-<<<<<<< HEAD
 	p = _strchr(strx, '=');
 	if (!p)
 		return (1);
@@ -46,16 +33,6 @@ int unset_alias(info_t *dat, char *strx)
 	ret = delete_node_at_index(&(dat->alias),
 		get_node_index(dat->alias, node_starts_with(dat->alias, strx, -1)));
 	*p = c;
-=======
-	d = _strchr(str, '=');
-	if (!d)
-		return (1);
-	c = *d;
-	*d = 0;
-	ret = delete_node_at_index(&(info->alias),
-		get_node_index(info->alias, node_starts_with(info->alias, str, -1)));
-	*d = c;
->>>>>>> 0322a0f009417584704cafef0138ec3b81b77a6d
 	return (ret);
 }
 
