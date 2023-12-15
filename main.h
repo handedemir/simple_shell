@@ -27,6 +27,6 @@ void display_prompt(void);
 char *_strtok(char *str, const char *delim);
 int _strcmp(char *str1, char *str2);
 char *locate_cmd(char *cmd);
-void execute(char **argv);
-int print_environment(void);
+void exec(char **argv);
+int print_envir(void);
 #endif

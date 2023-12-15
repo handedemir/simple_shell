@@ -50,7 +50,7 @@ int main(void)
 			break;
 		else if (_strcmp(argv[0], "env") == 0)
 		{
-			print_environment();
+			print_envir();
 			continue;
 		}
 		/* fork a child process and check if fork was successful */
@@ -65,7 +65,7 @@ int main(void)
 		if (pid == 0)
 		{
 			/* execute command */
-			execute(argv);
+			exec(argv);
 		}
 		else
 		{

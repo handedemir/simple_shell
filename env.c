@@ -1,27 +1,27 @@
 #include "main.h"
 
 /**
- * print_environment - Prints the environment variables
- * Return: On success, Always o
- * -1 is returned on error
- * It is initailized using the 'env' command
+ * print_envir - function is to print the environment
+ * Return: when is successful 0 is returned
+ * -1 is returned when error occurs
+ * It is initailized by the use of 'environ' command
  */
 
-int print_environment(void)
+int print_envir(void)
 {
-	char **env_ptr = environ;
+	char **envir_ptr = environ;
 
-	while (*env_ptr)
+	while (*envir_ptr)
 	{
-		size_t len = 0;
+		size_t length = 0;
 
-		while ((*env_ptr)[len])
-			len++;
+		while ((*envir_ptr)[length])
+			length++;
 
-		write(STDOUT_FILENO, *env_ptr, len);
+		write(STDOUT_FILENO, *envir_ptr, length);
 		write(STDOUT_FILENO, "\n", 1);
 
-		env_ptr++;
+		envir_ptr++;
 	}
 
 	return (0);
