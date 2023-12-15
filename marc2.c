@@ -1,66 +1,77 @@
 #include "marc8.h"
 
 /**
+<<<<<<< HEAD
  *_eputs - prints an input string
  * @strx: the string to be printed
  *
  * Return: Nothing
+=======
+ *_eputs - input strings will be printed
+ * @str: the string to be printed
+ * Return: Nothing to be returned
+>>>>>>> 0322a0f009417584704cafef0138ec3b81b77a6d
  */
 void _eputs(char *strx)
 {
-	int i = 0;
+	int k = 0;
 
 	if (!strx)
 		return;
+<<<<<<< HEAD
 	while (strx[i] != '\0')
 	{
 		_eputchar(strx[i]);
 		i++;
+=======
+	while (str[k] != '\0')
+	{
+		_eputchar(str[k]);
+		k++;
+>>>>>>> 0322a0f009417584704cafef0138ec3b81b77a6d
 	}
 }
 
 /**
- * _eputchar - writes the character c to stderr
- * @c: The character to print
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * _eputchar - cis going to be written  to stderr
+ * @c: parameter to print character
+ * Return: 1 is returned
+ * On error, -1 is returned for the error cases
  */
 int _eputchar(char c)
 {
-	static int i;
+	static int k;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
+	if (c == BUF_FLUSH || k >= WRITE_BUF_SIZE)
 	{
-		write(2, buf, i);
-		i = 0;
+		write(2, buf, k);
+		k = 0;
 	}
 	if (c != BUF_FLUSH)
-		buf[i++] = c;
+		buf[k++] = c;
 	return (1);
 }
 
 /**
- * _putfd - writes the character c to given fd
- * @c: The character to print
- * @fd: The filedescriptor to write to
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * _putfd - character c have the relationship with fd
+ * @c: c is the character to be printed
+ * @fd: The filedescriptor that we will write from
+ * Return: when is success 1 is printed
+ * On error, -1 for error case
  */
 int _putfd(char c, int fd)
 {
-	static int i;
+	static int k;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
+	if (c == BUF_FLUSH || k >= WRITE_BUF_SIZE)
 	{
-		write(fd, buf, i);
-		i = 0;
+		write(fd, buf, k);
+	k = 0;
 	}
 	if (c != BUF_FLUSH)
-		buf[i++] = c;
+		buf[k++] = c;
 	return (1);
 }
 
@@ -73,13 +84,17 @@ int _putfd(char c, int fd)
  */
 int _putsfd(char *strx, int fd)
 {
-	int i = 0;
+	int k = 0;
 
 	if (!strx)
 		return (0);
 	while (*strx)
 	{
+<<<<<<< HEAD
 		i += _putfd(*strx++, fd);
+=======
+		k += _putfd(*str++, fd);
+>>>>>>> 0322a0f009417584704cafef0138ec3b81b77a6d
 	}
-	return (i);
+	return (k);
 }

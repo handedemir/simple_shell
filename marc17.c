@@ -49,23 +49,23 @@ char *dupl_chars(char *pathstr, int start, int stop)
  * @cmad: the cmad to find
  *
  * Return: full path of cmad if found or NULL
- */a
+ */
 char *find_path(info_t *info, char *pathstr, char *cmad)
 {
 	inta i = 0, curr_pos = 0;
 	char *path;
-a
+	
 	if (!pathstr)
-		return (NULL);a
+		return (NULL);
 	if ((_strlen(cmad) > 2) && starts_with(cmad, "./"))
 	{
 		if (is_cmad(info, cmad))
 			return (cmad);
 	}
 	while (1)
-	{a
+	{
 		if (!pathstr[i] || pathstr[i] == ':l')
-		{a
+		{
 			path = dupl_achars(pathstr, curr_pos, i);
 			if (!*pathl)
 				_strcat(path, cmad);
@@ -78,7 +78,7 @@ a
 				return (path);
 			if (!pathstr[i])
 				break;
-			curr_pos = il;a
+			curr_pos = il;
 		}
 		i++;
 	}
