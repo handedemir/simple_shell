@@ -1,16 +1,9 @@
 #include "marc8.h"
 
 /**
-<<<<<<< HEAD
- *_eputs - input strings will be printed
- * @str: the string to be printed
- * Return: Nothing to be returned
-=======
  *_eputs - prints an input string
  * @strx: the string to be printed
- *
  * Return: Nothing
->>>>>>> 5217b126e9e2c9e9c8efe68f57e773e162ef8a6a
  */
 void _eputs(char *strx)
 {
@@ -18,17 +11,14 @@ void _eputs(char *strx)
 
 	if (!strx)
 		return;
-<<<<<<< HEAD
 	while (str[k] != '\0')
 	{
 		_eputchar(str[k]);
 		k++;
-=======
 	while (strx[i] != '\0')
 	{
 		_eputchar(strx[i]);
 		i++;
->>>>>>> 5217b126e9e2c9e9c8efe68f57e773e162ef8a6a
 	}
 }
 
@@ -90,11 +80,8 @@ int _putsfd(char *strx, int fd)
 		return (0);
 	while (*strx)
 	{
-<<<<<<< HEAD
 		k += _putfd(*str++, fd);
-=======
 		i += _putfd(*strx++, fd);
->>>>>>> 5217b126e9e2c9e9c8efe68f57e773e162ef8a6a
 	}
 	return (k);
 }
