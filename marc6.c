@@ -1,12 +1,11 @@
 #include "shell.h"
 
 /**
- * add_node - adds a node to the start of the list
- * @head: address of pointer to head node
- * @str: str field of node
- * @num: node index used by history
- *
- * Return: size of list
+ * add_node - adds a node to the start of the list to be used
+ * @head: address of pointer to head node of it
+ * @str: str field of node to be printed
+ * @num: node index used by history used
+ * Return: size of list to be checked
  */
 list_t *add_node(list_t **head, const char *str, int num)
 {
@@ -34,11 +33,10 @@ list_t *add_node(list_t **head, const char *str, int num)
 }
 
 /**
- * add_node_end - adds a node to the end of the list
- * @head: address of pointer to head node
- * @str: str field of node
- * @num: node index used by history
- *
+ * add_node_end - adds a node to the end of the list to be checked
+ * @head: address of pointer to head node to be used
+ * @str: str field of node to be used
+ * @num: node index used by history to be used
  * Return: size of list
  */
 list_t *add_node_end(list_t **head, const char *str, int num)
@@ -75,10 +73,9 @@ list_t *add_node_end(list_t **head, const char *str, int num)
 }
 
 /**
- * print_list_str - prints only the str element of a list_t linked list
- * @h: pointer to first node
- *
- * Return: size of list
+ * print_list_str - prints only the str element of a list
+ * @h: pointer to first node to be used
+ * Return: size of list to be used
  */
 size_t print_list_str(const list_t *h)
 {
@@ -135,10 +132,9 @@ int delete_node_at_index(list_t **head, unsigned int index)
 }
 
 /**
- * free_list - frees all nodes of a list
- * @head_ptr: address of pointer to head node
- *
- * Return: void
+ * free_list - frees all nodes of a list to be used
+ * @head_ptr: address of pointer to head node to be used
+ * Return: void to use
  */
 void free_list(list_t **head_ptr)
 {
