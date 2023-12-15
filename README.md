@@ -1,6 +1,6 @@
 # ALX 0x11. C - printf (ALX printf)
 
-## This is a ALX group project made by Fasakin Henry @fasakinhenry and Solomon Olungweonwi
+## This is a ALX group project made by Pacifique and Marc
 
 ### Introduction
 
