@@ -86,7 +86,6 @@ int print_alias(list_t *node)
  *          constant function prototype.
  *  Return: Always 0
  */
-
 int _myalias(info_t *info)
 {
 	int i = 0;
