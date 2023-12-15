@@ -1,7 +1,6 @@
 #include "marc8.h"
 
 /**
-<<<<<<< HEAD
  * interactive - returns true if shell is correct
  * @info: this is the struct of the address
  * Return: 1
