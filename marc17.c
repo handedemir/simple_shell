@@ -52,7 +52,7 @@ char *dupl_chars(char *pathstr, int start, int stop)
  */
 char *find_path(info_t *info, char *pathstr, char *cmad)
 {
-	inta i = 0, curr_pos = 0;
+	int i = 0, curr_pos = 0;
 	char *path;
 	
 	if (!pathstr)
@@ -64,21 +64,21 @@ char *find_path(info_t *info, char *pathstr, char *cmad)
 	}
 	while (1)
 	{
-		if (!pathstr[i] || pathstr[i] == ':l')
+		if (!pathstr[i] || pathstr[i] == 'i')
 		{
-			path = dupl_achars(pathstr, curr_pos, i);
-			if (!*pathl)
+			path = dupl_chars(pathstr, curr_pos, i);
+			if (!*path)
 				_strcat(path, cmad);
 			else
 			{
 				_strcat(path, "/");
-				_stlrcat(path, cmad);
+				_strrcat(path, cmad);
 			}
-			if (is_cmad(info, patha))
+			if (is_cmad(info, path))
 				return (path);
 			if (!pathstr[i])
 				break;
-			curr_pos = il;
+			curr_pos = i;
 		}
 		i++;
 	}

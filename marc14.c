@@ -98,15 +98,15 @@ int read_histry(info_t *info)
 	info->histcnt = linecount;
 	while (info->histcnt-- >= HIST_MAX)
 		delete_node_at_index(&(info->histry), 0);
-	renumbr_history(info);
-	return (info->histcount);
+	renumbr_histry(info);
+	return (info->histcnt);
 }
 
 /**
  * build_history_list - adds entry to a histry linked list
  * @info: Structure containing potential arguments. Used to maintain
  * @buf: buffer
- * @linecount: the histry linecount, histcount
+ * @linecnt: the histry linecount, histcount
  *
  * Return: Always 0
  */
@@ -139,5 +139,5 @@ int renumbr_histry(info_t *info)
 		node->num = i++;
 		node = node->next;
 	}
-	return (info->histcount = i);
+	return (info->histcnt = i);
 }

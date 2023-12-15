@@ -79,8 +79,8 @@ int populate_env_list(info_t *dat)
 	list_t *inter = NULL;
 	size_t v;
 
-	for (v = 0; environ[v]; v++)
-		add_node_end(&inter, environ[v], 0);
-	dat->environ = inter;
+	for (v = 0; envrn[v]; v++)
+		add_node_end(&inter, envrn[v], 0);
+	dat->envrn = inter;
 	return (0);
 }
