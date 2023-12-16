@@ -1,10 +1,10 @@
 #include "marc8.h"
 
 /**
- * get_environ - returns the string array copy of our environ
+ * get_environ - returns the string array copy of our environ to use
  * @dat: Structure containing potential arguments. Used to maintain
- *          constant function prototype.
- * Return: Always 0
+ *          constant function prototype to use
+ * Return: Always 0 to be used
  */
 char **get_environ(info_t *dat)
 {
@@ -18,28 +18,26 @@ char **get_environ(info_t *dat)
 }
 
 /**
-<<<<<<< HEAD
- * _unsetenv - function that can Remove an environment variable
- * @dat: Structure containing potential arguments.
- * @var: the string envi var property
- * Return: 0
+ * _unsetenv - function that can Remove env
+ * @dat: Structure containing potential arguments to use
+ * @var: the string envi var property to use
+ * Return: 0 to be returned
  */
 int _unsetenv(info_t *dat, char *var)
 {
 	list_t *node = info->env;
 	size_t k = 0;
 	char *d;
-	
-=======
- * _unsetenv - Remove an environment variable
- * @dat: Structure containing potential arguments. Used to maintain
- *        constant function prototype.
- *  Return: 1 on delete, 0 otherwise
- * @var: the string envi var property
+
+/**
+ * _unsetenv - Remove an environment variable to use
+ * @dat: Structure containing potential arguments to use
+ * @var: the variable
+ * Return: 0
+ *
  */
 int _unsetenv(info_t *dat, char *var)
 {
->>>>>>> 166f5cbd13679e232f4a62e884a89b75e92bfc48
 	list_t *node = dat->envi;
 	size_t i = 0;
 	char *p;
@@ -55,13 +53,11 @@ int _unsetenv(info_t *dat, char *var)
 			info->env_changed = delete_node_at_index(&(info->env), i);
 			k = 0;
 			node = info->env;
-<<<<<<< HEAD
 
 			dat->env_changed = delete_node_at_index(&(dat->envi), i);
 			i = 0;
 			node = dat->envi;
-=======
->>>>>>> 166f5cbd13679e232f4a62e884a89b75e92bfc48
+
 			continue;
 		}
 		node = node->next;
@@ -71,21 +67,10 @@ int _unsetenv(info_t *dat, char *var)
 }
 
 /**
-<<<<<<< HEAD
- * _setenv - Initialize a new environment variable,
- *             or modify an existing one
- * @dat: Structure containing potential arguments. Used to maintain
- *        constant function prototype.
- * @var: the string envi var property
- * @value: the string envi var value
- *  Return: Always 0
-=======
  * _setenv - Initialize a new environment variable or set environment as well
- * @info: Structure containing potential arguments to be used
  * @var: the string env var property to be used
  * @value: the string env var value that are needed to be used
  *  Return: Always 0 is returned
->>>>>>> 166f5cbd13679e232f4a62e884a89b75e92bfc48
  */
 int _setenv(info_t *dat, char *var, char *value)
 {
